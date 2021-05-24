@@ -15,11 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from users import views as user_views
 
 # die urlpatterns in der Projektebene mappen auf die verschiedenen App-Url-Patterns
 # der hier gematchte teil wird in den AppUrls  abgetrennt. 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),  
+    path('admin/', admin.site.urls),
+    path('register/', user_views.register, name='register'),  
     path('', include('blog.urls')), 
 ]
