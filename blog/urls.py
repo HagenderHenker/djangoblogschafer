@@ -16,12 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from . import views
-
+from .views import PostListView, PostDetailView, PostCreateView, PostUpdateView, PostDeleteView
 # die AppUrls sind von der urls.py auf Projektebene gemappt worden
 # vor all diesen routen ist der in der urls.py auf Projektebene angegebene Path anzugeben.
 
 urlpatterns = [
     path('', views.landing, name="blog-landing"),  
-    path('blog/', views.home, name="blog-home"),  
+    path('blog/', PostListView.as_view(), name="blog-home"),  
+    path('blog/post/<int:pk>', PostDetailView.as_view(), name="blog-detail"), #<pk> = variable hier PK kennung des Posts pk ist die Standardvariable für die Kennung (primary key)
+    path('blog/post/<int:pk>/update', PostUpdateView.as_view(), name="blog-update"), #<pk> = variable hier PK kennung des Posts pk ist die Standardvariable für die Kennung (primary key)
+    path('blog/post/<int:pk>/delete', PostDeleteView.as_view(), name="blog-delete"), #<pk> = variable hier PK kennung des Posts pk ist die Standardvariable für die Kennung (primary key)
+    path('blog/post/new/', PostCreateView.as_view(), name="blog-create"),
     path('about/', views.about, name="blog-about"), 
 ]
