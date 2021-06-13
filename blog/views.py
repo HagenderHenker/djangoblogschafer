@@ -21,7 +21,10 @@ class PostListView(ListView):
     model = Post
     template_name = "blog/home.html" # Standardtemplage = <app> / <model>_<viewtype>.html
     context_object_name = "posts"
-    ordering = ['-date_posted'] # ordering: sortiert  - dreht die sortierung um
+    ordering = ['-date_posted'] # v10 ordering: sortiert  - dreht die sortierung um
+    paginate_by = 2 #V11 hierdurch wird die Anzahl der Datensätze je Seite auf 2 begrenzt es fehlt aber noch an der Pagination im Template
+                    # im browser blättern geht durch url: http://127.0.0.1:8000/blog/?page=2
+    
 
 class PostDetailView(DetailView):
     model = Post
